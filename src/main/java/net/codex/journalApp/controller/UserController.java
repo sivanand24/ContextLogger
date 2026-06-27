@@ -26,12 +26,16 @@ public class UserController {
     @PutMapping
     public ResponseEntity<?> updateUser(@RequestBody User user) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String userName = authentication.getName();
+        String userName = getAuthentication(authentication).getName();
         User userInDb = userService.findByUserName(userName);
         userInDb.setUserName(user.getUserName());
         userInDb.setPassword(user.getPassword());
         userService.saveNewEntry(userInDb);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
+    private static Authentication getAuthentication(Authentication authentication) {
+        return authentication;
     }
 
     @DeleteMapping
