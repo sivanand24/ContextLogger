@@ -27,7 +27,7 @@
 		<url/>
 	</scm>
 	<properties>
-		<java.version>24</java.version>
+		<java.version>17</java.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -57,6 +57,12 @@
 			<artifactId>lombok</artifactId>
 			<version>1.18.42</version>
 			<scope>provided</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.mockito</groupId>
+			<artifactId>mockito-core</artifactId>
+			<version>5.12.0</version>
+			<scope>test</scope>
 		</dependency>
 	</dependencies>
 

@@ -53,7 +53,7 @@ public class JournalEntryService {
             User user = userService.findByUserName(userName);
             removed = user.getJournalEntries().removeIf(x -> x.getId().equals(id));
             if (removed) {
-                userService.saveNewEntry(user);
+                userService.saveNewUser(user);
                 journalEntryRepository.deleteById(id);
 
             }
