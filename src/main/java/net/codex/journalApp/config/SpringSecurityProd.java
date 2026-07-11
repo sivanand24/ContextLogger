@@ -1,11 +1,7 @@
 package net.codex.journalApp.config;
 
-
-
-
 import net.codex.journalApp.service.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
@@ -20,9 +16,8 @@ import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 @EnableWebSecurity
-@Profile("dev")
-public class SpringSecurity {
-
+@Profile("prod")
+public class SpringSecurityProd {
     @Autowired
     private UserDetailsServiceImpl userDetailsService;
 
@@ -30,9 +25,7 @@ public class SpringSecurity {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
         return http.authorizeHttpRequests(request -> request
-                        .requestMatchers("/journal/**","/user/**").authenticated()
-                        .requestMatchers("/admin/**").hasRole("ADMIN")
-                        .anyRequest().permitAll())
+                        .anyRequest().authenticated())
                 .httpBasic(Customizer.withDefaults())
                 .csrf(AbstractHttpConfigurer::disable)
                 .build();
