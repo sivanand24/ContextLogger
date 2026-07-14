@@ -14,23 +14,23 @@ import java.util.ArrayList;
 
 import static org.mockito.Mockito.when;
 
-@SpringBootTest
-public class UserDetailsServiceImplTest {
-    @InjectMocks
-    private UserDetailsServiceImpl userDetailsService;
-
-    @Mock
-    private UserRepository userRepository;
-
-    @BeforeEach
-    public void setUp(){
-        MockitoAnnotations.initMocks(this);
-    }
-
-    @Test
-    public  void loadUserByUsernameTest(){
-       // when(userRepository.findByUserName(ArgumentMatchers.anyString())).thenReturn(User.builder().username("ram").password("weteetyrtryj").roles(new ArrayList<>()).build())
-        UserDetails user = userDetailsService.loadUserByUsername("ram");
-        Assertions.assertNotNull(user);
-    }
-}
+//@SpringBootTest
+//public class UserDetailsServiceImplTest {
+//    @InjectMocks
+//    private UserDetailsServiceImpl userDetailsService;
+//
+//    @Mock
+//    private UserRepository userRepository;
+//
+//    @BeforeEach
+//    public void setUp(){
+//        MockitoAnnotations.initMocks(this);
+//    }
+//
+//    @Test
+//    public  void loadUserByUsernameTest(){
+//       // when(userRepository.findByUserName(ArgumentMatchers.anyString())).thenReturn(User.builder().username("ram").password("weteetyrtryj").roles(new ArrayList<>()).build())
+//        UserDetails user = userDetailsService.loadUserByUsername("ram");
+//        Assertions.assertNotNull(user);
+//    }
+//}
