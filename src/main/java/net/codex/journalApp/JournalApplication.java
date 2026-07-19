@@ -13,6 +13,8 @@ import org.springframework.transaction.TransactionException;
 import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+import java.util.Arrays;
+
 @SpringBootApplication
 @EnableTransactionManagement
 public class JournalApplication {
@@ -21,6 +23,9 @@ public class JournalApplication {
 		ConfigurableApplicationContext context =  SpringApplication.run(JournalApplication.class, args);
 		ConfigurableEnvironment environment = context.getEnvironment();
 		System.out.println(environment.getActiveProfiles()[0]);
+		System.out.println("Profile = " + Arrays.toString(environment.getActiveProfiles()));
+		System.out.println("Context Path = " + environment.getProperty("server.servlet.context-path"));
+		System.out.println("Port = " + environment.getProperty("server.port"));
 	}
 
 	@Bean

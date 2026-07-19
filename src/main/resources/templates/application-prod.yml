@@ -5,7 +5,7 @@ spring:
       database: journaldb
       auto-index-creation: true
   main:
-    allow-circular-reference: true
+    allow-circular-references: true
 
 
 server:
