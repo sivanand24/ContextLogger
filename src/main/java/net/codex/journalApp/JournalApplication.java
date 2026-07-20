@@ -12,6 +12,7 @@ import org.springframework.transaction.TransactionDefinition;
 import org.springframework.transaction.TransactionException;
 import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.Arrays;
 
@@ -20,18 +21,17 @@ import java.util.Arrays;
 public class JournalApplication {
 
 	public static void main(String[] args) {
-		ConfigurableApplicationContext context =  SpringApplication.run(JournalApplication.class, args);
-		ConfigurableEnvironment environment = context.getEnvironment();
-		System.out.println(environment.getActiveProfiles()[0]);
-		System.out.println("Profile = " + Arrays.toString(environment.getActiveProfiles()));
-		System.out.println("Context Path = " + environment.getProperty("server.servlet.context-path"));
-		System.out.println("Port = " + environment.getProperty("server.port"));
+		SpringApplication.run(JournalApplication.class, args);
 	}
 
 	@Bean
 	public PlatformTransactionManager add(MongoDatabaseFactory dbFactory) {
 		return new MongoTransactionManager(dbFactory);
 
+	}
+	@Bean
+	public RestTemplate restTemplate(){
+		return new RestTemplate();
 	}
 }
 
