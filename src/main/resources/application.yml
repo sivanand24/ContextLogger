@@ -10,3 +10,7 @@ server:
 logging:
   level:
     org.springframework.security: DEBUG
+
+weather:
+  api:
+    key: b0a32bbcd48481a6fc5b92708a4edef7
