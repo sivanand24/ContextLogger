@@ -1,6 +1,7 @@
 package net.codex.journalApp.repository;
 
 
+import org.bson.assertions.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -13,7 +14,7 @@ public class UserRepositoryImplTest {
 
     @Test
     public void testSaveNewUser() {
-        userRepositoryImpl.getUserForSA();
+        Assertions.assertNotNull(userRepositoryImpl.getUserForSA());
 
     }
 }
