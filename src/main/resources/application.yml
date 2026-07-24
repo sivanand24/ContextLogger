@@ -1,4 +1,14 @@
 spring:
+  redis:
+    host: localhost
+    port: 6379
+  data:
+    mongodb:
+      uri: mongodb+srv://sivanandmishra24_db_user:sivanand24@cluster0.gnzgvyd.mongodb.net/journaldb?retryWrites=true&w=majority
+      database: journaldb
+      auto-index-creation: true
+  main:
+    allow-circular-references: true
   profiles:
     active: dev
   mail:
