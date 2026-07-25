@@ -6,7 +6,6 @@ import net.codex.journalApp.entity.User;
 import net.codex.journalApp.enums.Sentiment;
 import net.codex.journalApp.repository.UserRepositoryImpl;
 import net.codex.journalApp.service.EmailService;
-import net.codex.journalApp.service.SentimentAnalysisService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
@@ -18,8 +17,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-import static com.fasterxml.jackson.databind.type.LogicalType.Map;
-
 @Component
 public class UserScheduler {
 
@@ -29,8 +26,6 @@ public class UserScheduler {
     @Autowired
     private UserRepositoryImpl userRepository;
 
-    @Autowired
-    private SentimentAnalysisService sentimentAnalysisService;
 
     @Autowired
     private AppCache appCache;
