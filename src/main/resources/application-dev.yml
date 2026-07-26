@@ -1,8 +1,7 @@
 spring:
   data:
     redis:
-      host: localhost
-      port: 6379
+      url: redis://default:qP1jnqpTp0sboQM4ApBmG2kjryzBw5Wb@laborer-cats-kitty-80185.db.redis.io:11626
     mongodb:
       uri: mongodb+srv://sivanandmishra24_db_user:sivanand24@cluster0.gnzgvyd.mongodb.net/journaldb?retryWrites=true&w=majority
       database: journaldb
