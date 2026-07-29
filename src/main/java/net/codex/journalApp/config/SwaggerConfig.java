@@ -19,7 +19,7 @@ public class SwaggerConfig {
     public OpenAPI myCustomConfig(){
         return new OpenAPI()
                 .info(
-                        new Info().title("Journal App APIs")
+                        new Info().title("Journal APIs")
                                 .description("By Sivanand mishra")
                 )
                 .servers(Arrays.asList(new Server().url("http://localhost:8081").description("local"),
