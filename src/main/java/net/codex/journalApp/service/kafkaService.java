@@ -27,5 +27,20 @@ public class kafkaService {
             System.out.println(e);
             throw new RuntimeException("An error occurred while saving the entry.",e);
         }
+
+    }
+
+    @Transactional
+    public void saveEntryofUser(JournalEntry journalEntry, String userName) {
+        try {
+            User user = userService.findByUserName(userName);
+            journalEntry.setDate(LocalDateTime.now());
+            JournalEntry saved = journalEntryRepository.save(journalEntry);
+            user.getJournalEntries().add(saved);
+            userService.saveUser(user);
+        } catch (Exception e) {
+            System.out.println(e);
+            throw new RuntimeException("An error occurred while saving the entry.", e);
+        }
     }
 }
