@@ -18,8 +18,13 @@ public class PublicController {
         return "Everything's fine";
     }
 
-    @PostMapping("/create-user")
-    public void createUser(@RequestBody User user){
+    @PostMapping("/signup")
+    public void signup(@RequestBody User user){
         userService.saveNewUser(user);
+    }
+
+    @PostMapping("/login")
+    public void login(@RequestBody User user){
+    userService.saveNewUser(user);
     }
 }
