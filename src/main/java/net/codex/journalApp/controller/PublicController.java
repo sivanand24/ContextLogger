@@ -32,6 +32,9 @@ public class PublicController {
     @Autowired
     private UserDetailsServiceImpl userDetailsService;
 
+    @Autowired
+    private JwtUtil jwtUtil;
+
     @GetMapping("/health-check")
     public String healthCheck(){
         return "Everything's fine";
@@ -47,7 +50,7 @@ public class PublicController {
     try{
         Authentication authenticate = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(user.getUserName(), user.getPassword()));
         UserDetails userDetails = userDetailsService.loadUserByUsername(user.getUserName());
-        String jwt = JwtUtil.generateToken(userDetails.getUsername());
+        String jwt = jwtUtil.generateToken(userDetails.getUsername());
 
     } catch(Exception e){
 

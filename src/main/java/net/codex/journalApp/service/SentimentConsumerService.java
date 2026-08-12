@@ -1,7 +1,8 @@
 package net.codex.journalApp.service;
 
+import net.codex.journalApp.model.SentimentData;
+import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.kafka.annotation.KafkaListener;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -9,7 +10,7 @@ public class SentimentConsumerService {
     @Autowired
     private EmailService emailService;
 
-    @KafkaListener(topics = "weekly-sentiments", groupId = "weekly-sentiment-group")
+    @RabbitListener(queues = "weekly-sentiments")
     public void consume(SentimentData sentimentData) {
         sendEmail(sentimentData);
     }

@@ -1,4 +1,6 @@
 spring:
+  rabbitmq:
+    addresses:
   data:
     redis:
       url: redis://default:qP1jnqpTp0sboQM4ApBmG2kjryzBw5Wb@laborer-cats-kitty-80185.db.redis.io:11626
