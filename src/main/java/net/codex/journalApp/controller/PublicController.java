@@ -2,13 +2,17 @@ package net.codex.journalApp.controller;
 
 import lombok.extern.slf4j.Slf4j;
 import net.codex.journalApp.entity.User;
+import net.codex.journalApp.service.UserDetailsServiceImpl;
 import net.codex.journalApp.service.UserService;
+import net.codex.journalApp.utilis.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.logging.Logger;
@@ -25,6 +29,9 @@ public class PublicController {
     @Autowired
     private AuthenticationManager authenticationManager;
 
+    @Autowired
+    private UserDetailsServiceImpl userDetailsService;
+
     @GetMapping("/health-check")
     public String healthCheck(){
         return "Everything's fine";
@@ -39,6 +46,8 @@ public class PublicController {
     public void login(@RequestBody User user){
     try{
         Authentication authenticate = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(user.getUserName(), user.getPassword()));
+        UserDetails userDetails = userDetailsService.loadUserByUsername(user.getUserName());
+        String jwt = JwtUtil.generateToken(userDetails.getUsername());
 
     } catch(Exception e){
 
