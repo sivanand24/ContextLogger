@@ -1,6 +1,6 @@
 spring:
   rabbitmq:
-    addresses:
+    addresses: amqps://vggefyim:407rrbhbbWSY2kPpPzqCw-KZ8vFHmZfF@warthog.lmq.cloudamqp.com/vggefyim
   data:
     redis:
       url: redis://default:qP1jnqpTp0sboQM4ApBmG2kjryzBw5Wb@laborer-cats-kitty-80185.db.redis.io:11626
