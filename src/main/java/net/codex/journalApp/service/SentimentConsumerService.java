@@ -12,6 +12,9 @@ public class SentimentConsumerService {
 
     @RabbitListener(queues = "weekly-sentiments")
     public void consume(SentimentData sentimentData) {
+        System.out.println("RabbitMQ message received!");
+        System.out.println("Email: " + sentimentData.getEmail());
+        System.out.println("Sentiment: " + sentimentData.getSentiment());
         sendEmail(sentimentData);
     }
 
