@@ -3,9 +3,9 @@ spring:
     addresses: ${CLOUDAMQP_URL}
   data:
     redis:
-      url: redis://default:qP1jnqpTp0sboQM4ApBmG2kjryzBw5Wb@laborer-cats-kitty-80185.db.redis.io:11626
+      url: ${REDIS_URL}
     mongodb:
-      uri: mongodb+srv://sivanandmishra24_db_user:sivanand24@cluster0.gnzgvyd.mongodb.net/journaldb?retryWrites=true&w=majority
+      uri: ${MONGODB_URI}
       database: journaldb
       auto-index-creation: true
   main:
@@ -15,8 +15,8 @@ spring:
   mail:
     host: smtp.gmail.com
     port: 587
-    username: sivanandmishra24@gmail.com
-    password: dkxc mujy lckb mhrp
+    username: ${EMAIL_USERNAME}
+    password: ${EMAIL_PASSWORD}
     properties:
       mail:
         smtp:
@@ -34,4 +34,4 @@ logging:
 
 weather:
   api:
-    key: b0a32bbcd48481a6fc5b92708a4edef7
+    key: ${WEATHER_API_KEY}

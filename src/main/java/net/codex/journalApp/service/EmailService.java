@@ -19,9 +19,11 @@ public class EmailService {
             mail.setSubject(subject);
             mail.setText(body);
             javaMailSender.send(mail);
+            log.info("Email sent successfully to {}", to);
 
         }catch (Exception e){
-            log.error("Exception while sending mail ", e);
+            log.error("Failed to send email to {}", to, e);
+            throw new RuntimeException("Email sending failed", e);
         }
     }
 }
