@@ -1,14 +1,40 @@
 spring:
+  ai:
+    ollama:
+      base-url: http://localhost:11434
+      chat:
+        options:
+          model: gemma3:1b
+          temperature: 0.0
+  rabbitmq:
+    addresses: ${CLOUDAMQP_URL}
   data:
     redis:
       url: ${REDIS_URL}
     mongodb:
-      uri: mongodb+srv://sivanandmishra24_db_user:sivanand24@cluster0.gnzgvyd.mongodb.net/journaldb?retryWrites=true&w=majority
+      uri: ${MONGODB_URI}
       database: journaldb
       auto-index-creation: true
   main:
     allow-circular-references: true
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: ${EMAIL_USERNAME}
+    password: ${EMAIL_PASSWORD}
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+logging:
+  level:
+    org.springframework.security: DEBUG
 
+weather:
+  api:
+    key: ${WEATHER_API_KEY}
 
 server:
   port: 8080

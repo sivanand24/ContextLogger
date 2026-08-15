@@ -1,4 +1,11 @@
 spring:
+  ai:
+    ollama:
+      base-url: http://localhost:11434
+      chat:
+        options:
+          model: gemma3:1b
+          temperature: 0.0
   rabbitmq:
     addresses: ${CLOUDAMQP_URL}
   data:
