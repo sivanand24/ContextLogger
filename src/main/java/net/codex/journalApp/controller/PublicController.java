@@ -6,6 +6,8 @@ import net.codex.journalApp.service.UserDetailsServiceImpl;
 import net.codex.journalApp.service.UserService;
 import net.codex.journalApp.utilis.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -46,14 +48,15 @@ public class PublicController {
     }
 
     @PostMapping("/login")
-    public void login(@RequestBody User user){
+    public ResponseEntity<String> login(@RequestBody User user){
     try{
         Authentication authenticate = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(user.getUserName(), user.getPassword()));
         UserDetails userDetails = userDetailsService.loadUserByUsername(user.getUserName());
         String jwt = jwtUtil.generateToken(userDetails.getUsername());
-
+        return new ResponseEntity<>(jwt, HttpStatus.OK);
     } catch(Exception e){
-
+        log.error("Exception is occurred while createAuthenticationToken",e);
+        return new ResponseEntity<>("Incorrect username or password",HttpStatus.BAD_REQUEST);
     }
 }
 }
