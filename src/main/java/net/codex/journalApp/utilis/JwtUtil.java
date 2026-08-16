@@ -12,7 +12,7 @@ import java.util.Map;
 
 @Component
 public class JwtUtil {
-    private String SECRET_KEY = "TaK+HaV^uvCHEFsEVfypW#7g9^k*Z8$V";
+    private String  SECRET_KEY = System.getenv("SECRET_KEY");
 
     private SecretKey getSigningKey() {
         return Keys.hmacShaKeyFor(SECRET_KEY.getBytes());
@@ -51,7 +51,7 @@ public class JwtUtil {
                 .header().empty().add("typ","JWT")
                 .and()
                 .issuedAt(new Date(System.currentTimeMillis()))
-                .expiration(new Date(System.currentTimeMillis() + 1000 * 60 * 50)) // 5 minutes expiration time
+                .expiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60)) //valid for 1 hour
                 .signWith(getSigningKey())
                 .compact();
     }
