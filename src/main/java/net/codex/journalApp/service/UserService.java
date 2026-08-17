@@ -1,5 +1,6 @@
 package net.codex.journalApp.service;
 
+import net.codex.journalApp.dto.UserDTO;
 import net.codex.journalApp.entity.User;
 import net.codex.journalApp.repository.UserRepository;
 import org.bson.types.ObjectId;

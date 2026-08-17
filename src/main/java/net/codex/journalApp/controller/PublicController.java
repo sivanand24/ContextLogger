@@ -1,6 +1,7 @@
 package net.codex.journalApp.controller;
 
 import lombok.extern.slf4j.Slf4j;
+import net.codex.journalApp.dto.UserDTO;
 import net.codex.journalApp.entity.User;
 import net.codex.journalApp.service.UserDetailsServiceImpl;
 import net.codex.journalApp.service.UserService;

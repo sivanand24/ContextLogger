@@ -4,8 +4,10 @@ import net.codex.journalApp.cache.AppCache;
 import net.codex.journalApp.entity.JournalEntry;
 import net.codex.journalApp.entity.User;
 import net.codex.journalApp.enums.Sentiment;
+import net.codex.journalApp.model.SentimentData;
 import net.codex.journalApp.repository.UserRepositoryImpl;
 import net.codex.journalApp.service.EmailService;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
@@ -26,9 +28,11 @@ public class UserScheduler {
     @Autowired
     private UserRepositoryImpl userRepository;
 
-
     @Autowired
     private AppCache appCache;
+
+    @Autowired
+    private RabbitTemplate rabbitTemplate;
 
     @Scheduled(cron = "0 0 9 * * SUN")
     public void fetchUsersAndSendSaMail() {
@@ -50,7 +54,13 @@ public class UserScheduler {
                 }
             }
             if(mostFrequentSentiment != null){
-                emailService.sendEmail(user.getEmail(),"Sentiment for last 7 days", mostFrequentSentiment.toString());
+                SentimentData sentimentData = SentimentData.builder().email(user.getEmail()).sentiment("Sentiment for last 7 days " + mostFrequentSentiment).build();
+                try{
+                    rabbitTemplate.convertAndSend("weekly-sentiments",sentimentData.getEmail(),sentimentData);
+                } catch(Exception e){
+                    emailService.sendEmail(sentimentData.getEmail(), "Sentiment for previous week", String.valueOf(sentimentData));
+                }
+
             }
         }
     }
