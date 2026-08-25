@@ -1,5 +1,7 @@
 package net.codex.journalApp.controller;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
+import io.swagger.v3.oas.annotations.tags.Tags;
 import net.codex.journalApp.cache.AppCache;
 import net.codex.journalApp.entity.User;
 import net.codex.journalApp.service.UserService;
@@ -10,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@Tag(name = " ADMIN APIs", description = "admin creation,fetch,clear-cache")
 @RestController
 @RequestMapping("/admin")
 public class AdminController {

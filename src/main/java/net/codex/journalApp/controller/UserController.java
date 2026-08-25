@@ -1,5 +1,6 @@
 package net.codex.journalApp.controller;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import net.codex.journalApp.api.response.WeatherResponse;
 import net.codex.journalApp.entity.User;
 
@@ -12,7 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
-
+@Tag(name = "USER APIs" , description = "user related REST APIs")
 @RestController
 @RequestMapping("/user")
 public class UserController {

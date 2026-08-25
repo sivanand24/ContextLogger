@@ -1,5 +1,6 @@
 package net.codex.journalApp.controller;
 
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import net.codex.journalApp.dto.UserDTO;
 import net.codex.journalApp.entity.User;
@@ -20,6 +21,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.logging.Logger;
 
+@Tag(name = "PUBLIC APIs",description = "signup/login/health-check")
 @Slf4j
 @RestController
 @RequestMapping("/public")
