@@ -114,11 +114,11 @@ spring.security.oauth2.client.registration.google.client-secret=your_google_clie
 
 ### 3. Build and run
 ```bash
-# With Maven
+# If you're using with Maven
 mvn clean install
 mvn spring-boot:run
 
-# With Docker
+# If you're using with Docker
 docker build -t contextlogger .
 docker run -p 8080:8080 --env-file .env contextlogger
 ```
@@ -132,19 +132,19 @@ docker run -p 8080:8080 --env-file .env contextlogger
 ## 📡 API Endpoints
 
 ### Auth
-| Method | Endpoint | Description |
-|--------|----------|-------------|
-| `POST` | `/api/auth/register` | Register a new user |
-| `POST` | `/api/auth/login` | Login and receive a JWT |
+| Method | Endpoint                       | Description |
+|--------|--------------------------------|-------------|
+| `POST` | `/api/auth/signup`             | Register a new user |
+| `POST` | `/api/auth/login`              | Login and receive a JWT |
 | `GET`  | `/oauth2/authorization/google` | OAuth2 Google login |
 
 ### Journals
 | Method | Endpoint | Description |
 |--------|----------|-------------|
-| `GET`  | `/api/journals` | Get all journals for the logged-in user |
-| `POST` | `/api/journals` | Create a new journal entry |
-| `PUT`  | `/api/journals/{id}` | Update a journal entry |
-| `DELETE` | `/api/journals/{id}` | Delete a journal entry |
+| `GET`  | `/api/journal` | Get all journals for the logged-in user |
+| `POST` | `/api/journal` | Create a new journal entry |
+| `PUT`  | `/api/journal/{id}` | Update a journal entry |
+| `DELETE` | `/api/journal/{id}` | Delete a journal entry |
 
 >  All journal endpoints require a valid JWT in the `Authorization: Bearer <token>` header. Explore the full interactive API at the [live Swagger UI](https://contextlogger.onrender.com/swagger-ui/index.html).
 
@@ -183,5 +183,5 @@ This ensures the `main` branch always builds successfully.
 
 **Sivanand Mishra**
 - GitHub: [@sivanand24](https://github.com/sivanand24)
-- LinkedIn: [sivanand-mishra](https://www.linkedin.com/in/sivanand-mishra-6aba4123a)
+- LinkedIn: [sivanand-mishra](https://www.linkedin.com/in/sivanandh-mishra-6aba4123a/)
 - Email: Sivanandmishra24@gmail.com
