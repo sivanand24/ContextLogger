@@ -6,12 +6,12 @@
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
 		<version>3.5.4</version>
-		<relativePath/> <!-- lookup parent from repository -->
+		<relativePath/>
 	</parent>
 	<groupId>net.codex</groupId>
-	<artifactId>journalApp</artifactId>
+	<artifactId>ContextLogger</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>journal App</name>
+	<name>Context Logger</name>
 	<description>E2EE journal</description>
 	<url/>
 	<licenses>
