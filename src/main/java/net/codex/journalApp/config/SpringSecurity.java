@@ -4,6 +4,8 @@ package net.codex.journalApp.config;
 
 
 import net.codex.journalApp.filter.JwtFilter;
+import net.codex.journalApp.service.CustomOidcUserService;
+import net.codex.journalApp.service.OAuth2UserService;
 import net.codex.journalApp.service.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -33,10 +35,19 @@ public class SpringSecurity {
     @Autowired
     private JwtFilter jwtFilter;
 
+    @Autowired
+    private OAuth2UserService oAuth2UserService;
+
+    @Autowired
+    private OAuth2SuccessHandler oAuth2SuccessHandler;
+
+    @Autowired
+    private CustomOidcUserService customOidcUserService;
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 
-        return http.authorizeHttpRequests(request -> request
+         http.authorizeHttpRequests(request -> request
                         .requestMatchers("/public/**","/swagger-ui/**",
                                 "/v3/api-docs/**",
                                 "/swagger-resources/**",
@@ -45,11 +56,24 @@ public class SpringSecurity {
                         .requestMatchers("/admin/**").hasRole("ADMIN")
                         .anyRequest().authenticated())
                 .csrf(AbstractHttpConfigurer::disable)
-                .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class)
-                .build();
+                 .oauth2Login(oauth -> oauth
+
+                         .userInfoEndpoint(userInfo ->
+                                 userInfo.oidcUserService(
+                                         customOidcUserService
+                                 )
+                         )
+
+                         .successHandler(
+                                 oAuth2SuccessHandler
+                         )
+                 );
+
+                http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
+
+                return http.build();
     }
 
-    @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
     }

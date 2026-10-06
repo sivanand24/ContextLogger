@@ -31,3 +31,5 @@ build/
 
 ### VS Code ###
 .vscode/
+contextlogger-firebase-adminsdk-fbsvc-7f128d4463.json
+*.json
