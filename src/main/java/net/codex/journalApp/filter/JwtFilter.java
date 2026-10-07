@@ -1,5 +1,6 @@
 package net.codex.journalApp.filter;
 
+import ch.qos.logback.classic.helpers.MDCInsertingServletFilter;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -25,6 +26,7 @@ public class JwtFilter extends OncePerRequestFilter {
 
     @Autowired
     private JwtUtil jwtUtil;
+    private MDCInsertingServletFilter filterChain;
 
     @Override
     protected boolean shouldNotFilter(HttpServletRequest request) {
@@ -40,18 +42,29 @@ public class JwtFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws ServletException, IOException {
-        String authorizationHeader = request.getHeader("Authorization");
+        String authorizationHeader =
+                request.getHeader("Authorization");
+
         String username = null;
         String jwt = null;
-        if (authorizationHeader != null && authorizationHeader.startsWith("Bearer ")) {
-            jwt = authorizationHeader.substring(7);
-            try{
-                username = jwtUtil.extractUsername(jwt);
-            } catch (Exception e){
-                log.error("Invalid JWT: ",e);
-            }
 
+        if (authorizationHeader == null ||
+                !authorizationHeader.startsWith("Bearer ")) {
+
+            chain.doFilter(request, response);
+            return;
         }
+
+        jwt = authorizationHeader.substring(7);
+
+        try {
+            username = jwtUtil.extractUsername(jwt);
+        } catch (Exception e) {
+            log.error("Invalid JWT: ", e);
+        }
+
+        chain.doFilter(request, response);
+
         if (username != null) {
             UserDetails userDetails = userDetailsService.loadUserByUsername(username);
             if (jwtUtil.validateToken(jwt)) {
@@ -63,4 +76,5 @@ public class JwtFilter extends OncePerRequestFilter {
         }
         chain.doFilter(request, response);
     }
-}
+        }
+
